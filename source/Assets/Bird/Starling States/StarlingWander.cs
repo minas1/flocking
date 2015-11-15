@@ -31,30 +31,18 @@ public class StarlingWander : SingleBirdState
 
     public Bounds BoundingBox
     {
-        get
-        {
-            return wanderSteering.bbox;
-        }
-        set
-        {
-            wanderSteering.bbox = value;
-        }
+        get { return wanderSteering.bbox; }
+        set { wanderSteering.bbox = value; }
     }
 
     public Wander wanderSteering
     {
-        get
-        {
-            return (behavior as PrioritySteering).Groups[1].Behaviors[0].behaviour as Wander;
-        }
+        get { return (behavior as PrioritySteering).Groups[1].Behaviors[0].behaviour as Wander; }
     }
 
     public ObstacleAvoidance obstacleAvoidanceSteering
     {
-        get
-        {
-            return (behavior as PrioritySteering).Groups[0].Behaviors[0].behaviour as ObstacleAvoidance;
-        }
+        get { return (behavior as PrioritySteering).Groups[0].Behaviors[0].behaviour as ObstacleAvoidance; }
     }
 
     public override void Update(float dt, Bird bird)
@@ -68,26 +56,12 @@ public class StarlingWander : SingleBirdState
         // make wander behavior's angle same as the target position of the avoidance behavior,
         // so that when wander will be used it will have the correct (current) angle of the bird
         // and not its old one
-        if( prioritySteering.lastUsedSteering == 0 ) // obstacle avoidance
+        if (prioritySteering.lastUsedSteering == 0) // obstacle avoidance
         {
             wander.LookAt(avoidance.targetPosition);
             wander.customYSpeed = 0f;
         }
 	}
 
-	public override void FixedUpdate()
-	{
-	}
-	
-	public override void onCollisionEnter(Collision other)
-	{
-	}
-	
-	public override void onCollisionStay(Collision other)
-	{
-	}
-	
-	public override void onCollisionExit(Collision other)
-	{
-	}
+	public override void FixedUpdate() {}
 }

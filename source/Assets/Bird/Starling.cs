@@ -23,8 +23,6 @@ public class Starling : Bird
         }
 
         maxSpeed = 20f;
-
-        //transform.Find("birdMesh").renderer.material.color = new Color(0.44f, 0.86f, 0.57f);
 	}
 
 	// Update is called once per frame
@@ -32,29 +30,27 @@ public class Starling : Bird
 	{
         if (state != null)
         {
-            if( state.IsSingleBirdState )
+            if (state.IsSingleBirdState)
                 state.Update(Time.deltaTime, this);
             else
                 ((MultipleBirdState)state).Update(Time.deltaTime);
         }
 
-        if( velocity.normalized.y < -0.6f )
+        if (velocity.normalized.y < -0.6f)
         {
-            foreach(AnimationState animState in anim)
+            foreach (AnimationState animState in anim)
                 animState.speed = 0f;
         }
         else
         {
-            foreach(AnimationState animState in anim)
+            foreach (AnimationState animState in anim)
                 animState.speed = ANIMATION_SPEED;
         }
     }
     
     public override void FixedUpdate()
 	{
-		if( state != null )
+		if (state != null)
             state.FixedUpdate();
 	}
-
-
 }

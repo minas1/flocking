@@ -109,11 +109,11 @@ public class Main : MonoBehaviour
         else if (state == State.FlockWander)
         {
             // rotate camera
-            if( Input.GetKey(KeyCode.LeftArrow) )
+            if (Input.GetKey(KeyCode.LeftArrow))
                 cameraAngle += 50f * Time.deltaTime;
-            else if( Input.GetKey(KeyCode.RightArrow) )
+            else if (Input.GetKey(KeyCode.RightArrow))
                 cameraAngle -= 50f * Time.deltaTime;
-            else if( Input.GetKeyDown(KeyCode.Escape) )
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Pause();
             }
@@ -121,20 +121,19 @@ public class Main : MonoBehaviour
             // zoom in and out when the mouse wheel is scrolled
             cameraDistanceFromFlock -= 50f * Input.GetAxis("Mouse ScrollWheel");
 
-            if( cameraModeIndex == 0 )
-                //FocusCameraOnFlock();
+            if (cameraModeIndex == 0)
                 FocusCameraOnAnchor();
-            else if( cameraModeIndex == 1 )
+            else if (cameraModeIndex == 1)
                 FocusCameraOnRandomBoid();
         }
-        else if( state == State.FlockFormation )
+        else if (state == State.FlockFormation)
         {
             // rotate camera
-            if(Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
                 cameraAngle += 50f * Time.deltaTime;
-            else if(Input.GetKey(KeyCode.RightArrow))
+            else if (Input.GetKey(KeyCode.RightArrow))
                 cameraAngle -= 50f * Time.deltaTime;
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Escape))
                 Pause();
 
             // zoom in and out when the mouse wheel is scrolled
@@ -142,14 +141,14 @@ public class Main : MonoBehaviour
 
             FocusCameraOnAnchor();
         }
-        else if(state == State.InGame || state == State.GameEnd)
+        else if (state == State.InGame || state == State.GameEnd)
         {
             // rotate camera
-            if(Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
                 cameraAngle += 50f * Time.deltaTime;
-            else if(Input.GetKey(KeyCode.RightArrow))
+            else if (Input.GetKey(KeyCode.RightArrow))
                 cameraAngle -= 50f * Time.deltaTime;
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Escape))
                 Pause();
 
             var g = flockState as FlockGame;
@@ -161,11 +160,11 @@ public class Main : MonoBehaviour
             
             FocusCameraOnAnchor();
         }
-        else if(state == State.Paused)
+        else if (state == State.Paused)
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
                 Unpause();
-            else if(Input.GetKeyDown(KeyCode.Q))
+            else if (Input.GetKeyDown(KeyCode.Q))
                 Reset();
         }
 	}
@@ -186,7 +185,7 @@ public class Main : MonoBehaviour
 
     void OnGUI()
     {
-        if( state == State.FlockWander )
+        if (state == State.FlockWander)
         {
             var flockWander = (FlockWander)flockState;
 
@@ -243,7 +242,7 @@ public class Main : MonoBehaviour
                 else if (boidsInUse < vertices.Count)
                 {
                    // if we already have enough, enable some
-                    if(boidsGenerated >= vertices.Count)
+                    if (boidsGenerated >= vertices.Count)
                     {
                         Debug.Log("enabling " + (vertices.Count - boidsInUse));
                         int count = vertices.Count - boidsInUse;
@@ -269,7 +268,7 @@ public class Main : MonoBehaviour
                         int j = 0;
                         var starlings = GameObject.FindGameObjectsWithTag("Starling");
                         GameObject starling = null;
-                        while( !starlings[j].activeSelf || starlings[j].name == "Player" )
+                        while (!starlings[j].activeSelf || starlings[j].name == "Player")
                             ++j;
                         starling = starlings[j];
 
@@ -492,7 +491,7 @@ public class Main : MonoBehaviour
         var starlings = GameObject.FindGameObjectsWithTag("Starling");
         for (int i = 0; i < starlings.Length; ++i)
         {
-            if( starlings[i].name == "Player" )
+            if (starlings[i].name == "Player")
                 continue;
             
             var starling = starlings[i].GetComponent<Starling>();
@@ -501,7 +500,6 @@ public class Main : MonoBehaviour
             sphere.transform.localScale = new Vector3(2f, 2f, 2f);
             sphere.GetComponent<Renderer>().material.name = "Water Splash2";
             sphere.GetComponent<Renderer>().material.color = new Color(1, 1, 1,1);
-
 
             starling.state = formation;
             formation.Add(starling);
@@ -551,7 +549,7 @@ public class Main : MonoBehaviour
     {
         if (separationMenuShown)
         {
-            if( GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-") )
+            if (GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-"))
                 separationMenuShown = !separationMenuShown;
 
             float temp;
@@ -574,14 +572,14 @@ public class Main : MonoBehaviour
 
             // SEPARATION a-knn approximation value
             GUI.Label(new Rect(x + 12.5f, y + 95, 150, 25), "a-knn epsilon");
-            if( float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 115f, 150, 25), flockWander.separationAknnVal.ToString(".000")), out temp) )
+            if (float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 115f, 150, 25), flockWander.separationAknnVal.ToString(".000")), out temp))
                 flockWander.separationAknnVal = temp;
             else
                 flockWander.separationAknnVal = 1.0f;
             
             // SEPARATION distance
             GUI.Label(new Rect(x + 12.5f, y + 145, 150, 25), "neighbors within (m)");
-            if( float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 165, 150, 25), flockWander.separationDistance.ToString(".000")), out temp) )
+            if(float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 165, 150, 25), flockWander.separationDistance.ToString(".000")), out temp))
                 flockWander.separationDistance = temp;
             else
                 flockWander.separationDistance = 5.0f;
@@ -613,7 +611,7 @@ public class Main : MonoBehaviour
     {
         if (cohesionMenuShown)
         {
-            if( GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-") )
+            if (GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-"))
                 cohesionMenuShown = !cohesionMenuShown;
             
             float temp;
@@ -674,7 +672,7 @@ public class Main : MonoBehaviour
     {
         if (velocityMatchMenuShown)
         {
-            if( GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-") )
+            if (GUI.Button(new Rect(x + 150f, y + 5f, 20, 20), "-"))
                 velocityMatchMenuShown = !velocityMatchMenuShown;
             
             float temp;
@@ -697,14 +695,14 @@ public class Main : MonoBehaviour
 
             // velocityMatch a-knn approximation value
             GUI.Label(new Rect(x + 12.5f, y + 95f, 150, 25), "a-knn epsilon");
-            if( float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 115f, 150, 25), flockWander.velocityMatchAknnVal.ToString(".000")), out temp) )
+            if (float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 115f, 150, 25), flockWander.velocityMatchAknnVal.ToString(".000")), out temp))
                 flockWander.velocityMatchAknnVal = temp;
             else
                 flockWander.velocityMatchAknnVal = 50.0f;
             
             // velocityMatch distance
             GUI.Label(new Rect(x + 12.5f, y + 145f, 150, 25), "neighbors within (m)");
-            if( float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 165f, 150, 25), flockWander.velocityMatchDistance.ToString(".000")), out temp) )
+            if (float.TryParse(GUI.TextField(new Rect(x + 12.5f, y + 165f, 150, 25), flockWander.velocityMatchDistance.ToString(".000")), out temp))
                 flockWander.velocityMatchDistance = temp;
             else
                 flockWander.velocityMatchDistance = 100.0f;

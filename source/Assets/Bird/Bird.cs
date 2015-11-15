@@ -34,38 +34,14 @@ public abstract class Bird : MonoBehaviour, Entity
 
 	public Vector3 Velocity() { return GetComponent<Rigidbody>().velocity; }
 	
-	void OnTriggerEnter(Collider other)
-	{
-        //rigidbody.angularVelocity = Vector3.zero;
-		Debug.Log("parent enter");
-	}
-	
 	void OnTriggerStay(Collider other)
 	{
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-		//Debug.Log("parent stay");
 	}
 	
 	void OnTriggerExit(Collider other)
 	{
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-		//Debug.Log("parent exit");	
-	}
-
-	void OnCollisionEnter(Collision other)
-	{
-	}
-
-	void OnCollisionStay(Collision other)
-	{
-
-		//state.onCollisionStay(other);
-	}
-
-	void OnCollisionExit(Collision other)
-	{
-
-		//state.onCollisionExit(other);
 	}
 
     public float maxSpeed

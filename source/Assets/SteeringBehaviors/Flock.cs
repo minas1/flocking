@@ -190,28 +190,28 @@ namespace Flocking
             int j = indexX + 1;
 
             int neighbors = 0;
-            while( neighbors < maxNeighbors )
+            while (neighbors < maxNeighbors)
             {
-                if( i >= 0 && j < boidsX.Count )
+                if (i >= 0 && j < boidsX.Count)
                 {
-                    if( Vector3.Distance(boidsX[i].position, character.position) > maxDistance && Vector3.Distance(boidsX[j].position, character.position) > maxDistance )
+                    if (Vector3.Distance(boidsX[i].position, character.position) > maxDistance && Vector3.Distance(boidsX[j].position, character.position) > maxDistance)
                         break;
 
-                    if( Vector3.Distance(boidsX[i].position, character.position) < Vector3.Distance(boidsX[j].position, character.position) )
+                    if (Vector3.Distance(boidsX[i].position, character.position) < Vector3.Distance(boidsX[j].position, character.position))
                         --i;
                     else
                         ++j;
                 }
-                else if( i >= 0 )
+                else if (i >= 0)
                 {
-                    if( Vector3.Distance(boidsX[i].position, character.position) > maxDistance )
+                    if (Vector3.Distance(boidsX[i].position, character.position) > maxDistance)
                         break;
 
                     --i;
                 }
-                else if( j < boidsX.Count )
+                else if (j < boidsX.Count)
                 {
-                    if( Vector3.Distance(boidsX[j].position, character.position) > maxDistance )
+                    if (Vector3.Distance(boidsX[j].position, character.position) > maxDistance)
                         break;
 
                     ++j;
@@ -221,9 +221,9 @@ namespace Flocking
 
                 ++neighbors;
             }
-            for(i = 0; i < neighbors; ++i)
+            for (i = 0; i < neighbors; ++i)
             {
-                if( Vector3.Distance(boidsX[i].position, character.position) <= maxDistance )
+                if (Vector3.Distance(boidsX[i].position, character.position) <= maxDistance)
                 {
                     center += boidsX[i].position;
                     avgVel += boidsX[i].velocity;
@@ -277,7 +277,7 @@ namespace Flocking
 			if( neighbourhood.Count == 0 )
 				return vel;
 			
-			foreach(var boid in neighbourhood)
+			foreach (var boid in neighbourhood)
 				vel += boid.velocity;
 			
 			return vel / neighbourhood.Count;
@@ -288,10 +288,10 @@ namespace Flocking
 		/// </summary>
 		public void Add(params Entity[] _boids)
 		{
-            if( boids.Count + _boids.Length >= points.Length / 6 )
+            if (boids.Count + _boids.Length >= points.Length / 6)
                 points = new double[(boids.Count + _boids.Length) * 2, 6];
 
-			foreach(var boid in _boids)
+			foreach (var boid in _boids)
             {
                 boids.Add(boid);
 

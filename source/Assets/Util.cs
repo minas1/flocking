@@ -1,16 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-//using Leap;
 
 public static class Util
 {
-    public static void Swap<T>(ref T a, ref T b)
-    {
-        var temp = a;
-        a = b;
-        b = temp;
-    }
 
 	/// <summary>
 	/// Normalizes the angle.
@@ -41,42 +34,6 @@ public static class Util
 	{
 		return UnityEngine.Random.Range(0f, 1f) - UnityEngine.Random.Range(0f, 1f);
 	}
-	
-	/// <summary>
-	/// Returns true if the character at p0 is moving towards p1 with the given velocity
-	/// </summary>
-	public static bool MovesTowards(Vector3 p0, Vector3 p1, Vector3 velocity)
-	{
-		float d0 = (p1 - p0).magnitude;
-		
-		p0 += velocity;
-		
-		float d1 = (p1 - p0).magnitude;
-		
-		return d1 < d0;
-	}
-	
-	/// <summary>
-	/// Keeps in the "colliders" list only the colliders that have tag equal to one of the tags in "tags" list
-	/// </summary>
-	public static void filterSelectedTags(List<Collider> colliders, string[] tags)
-	{
-		bool changes = false;
-		do
-		{
-			changes = false;
-			foreach(var collider in colliders)
-			{
-				if( Array.Find(tags, str => str == collider.tag) == null )
-				{
-					colliders.Remove(collider);
-					changes = true;
-					break;
-				}
-			}
-			
-		} while(changes == true);
-	}
 
     public static void GetCollidersInRange(List<Collider> colliders, string tag, Vector3 p, float distance)
     {
@@ -84,7 +41,7 @@ public static class Util
 
         foreach (var g in gameObjects)
         {
-            if( Vector3.Distance(g.transform.position, p) <= distance )
+            if (Vector3.Distance(g.transform.position, p) <= distance)
             {
                 colliders.Add(g.GetComponent<Collider>());
             }
@@ -93,9 +50,9 @@ public static class Util
 
     public static int BinarySearchClosestEntity(List<Entity> list, Entity e)
     {
-        if( list.Count == 0 )
+        if (list.Count == 0)
             return -1;
-        else if( list.Count == 1 )
+        else if (list.Count == 1)
             return 0;
 
         int left, right, mid;
@@ -105,33 +62,27 @@ public static class Util
         right = list.Count;
         closestIndex = (left + right) / 2;
         
-        while( left <= right )
+        while (left <= right)
         {
             mid = (left + right) / 2;
          
             // if the value was found, stop here
-            if( list[mid] == e )
+            if (list[mid] == e)
             {
                 closestIndex = mid;
                 break;
             }
             
-            if( Mathf.Abs(list[mid].position.x - e.position.x) < Mathf.Abs(list[closestIndex].position.x - e.position.x) )
+            if (Mathf.Abs(list[mid].position.x - e.position.x) < Mathf.Abs(list[closestIndex].position.x - e.position.x))
                 closestIndex = mid;
             
             var valueLeft = (mid - 1 >= 0 ? list[mid - 1].position.x : float.MaxValue);
             var valueRight = (mid + 1 < list.Count ? list[mid + 1].position.x : float.MaxValue);
             
-            if( Math.Abs(valueLeft - e.position.x) < Math.Abs(valueRight - e.position.x) )
-            {
-                // go left
-                right = mid - 1;
-            }
+            if (Math.Abs(valueLeft - e.position.x) < Math.Abs(valueRight - e.position.x))
+                right = mid - 1; // // go left
             else
-            {
-                // go right
-                left = mid + 1;
-            }
+                left = mid + 1; // go right
         }
         
         return closestIndex;
@@ -152,7 +103,7 @@ public static class Util
         
         string line;
         var file = new System.IO.StreamReader(filename);
-        while( (line = file.ReadLine()) != null )
+        while ((line = file.ReadLine()) != null)
         {
             var strArray = line.Split(' ');
             var v = new Vector3(float.Parse(strArray[0]), float.Parse(strArray[1]), float.Parse(strArray[2]));
@@ -179,7 +130,7 @@ public static class Util
         do
         {
             alglib.kdtree kdt;
-            for(int i = 0; i < vertices.Count; ++i)
+            for (int i = 0; i < vertices.Count; ++i)
             {
                 points[i, 0] = vertices[i].x;
                 points[i, 1] = vertices[i].y;
@@ -190,7 +141,7 @@ public static class Util
             alglib.kdtreebuild(points, vertices.Count, 3, 0, 2, out kdt);
             
             bool merged = false;
-            for(int i = 0; i < vertices.Count; ++i)
+            for (int i = 0; i < vertices.Count; ++i)
             {
                 point[0] = vertices[i].x;
                 point[1] = vertices[i].y;
@@ -206,7 +157,7 @@ public static class Util
                 
                 // find the median point
                 var sum = new Vector3();
-                for(int j = 0; j < neighbors; ++j)
+                for (int j = 0; j < neighbors; ++j)
                 {
                     var v = new Vector3((float)results[j, 0], (float)results[j, 1], (float)results[j, 2]);
                     sum += v;
@@ -219,9 +170,7 @@ public static class Util
             
             stop = !merged;
             
-        } while( !stop );
-
-        
+        } while (!stop);
     }
 
     public static void NormalizeAndMultiplyPoints(List<Vector3> points)
@@ -230,10 +179,10 @@ public static class Util
 
         var sum = Vector3.zero;
 
-        foreach(var p in points)
+        foreach (var p in points)
         {
             sum += p;
-            if( p.magnitude > maxLength )
+            if (p.magnitude > maxLength)
                 maxLength = p.magnitude;
         }
     }

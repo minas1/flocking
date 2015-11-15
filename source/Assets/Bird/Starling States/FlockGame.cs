@@ -47,7 +47,7 @@ public class FlockGame : MultipleBirdState
         anchorFlock.Add(anchor);
         boidSteeringType = new BoidSteeringType[entries.Count];
 
-        for(int i = 0; i < entries.Count; ++i)
+        for (int i = 0; i < entries.Count; ++i)
         {
             entries[i].behavior = getDefaultSteering(entries[i]);
             boidSteeringType[i] = BoidSteeringType.Free;
@@ -71,9 +71,9 @@ public class FlockGame : MultipleBirdState
         updateTimer.Start();
 
         // reset values
-        for(int i = 0; i < entries.Count; ++i)
+        for (int i = 0; i < entries.Count; ++i)
         {
-            if( boidSteeringType[i] == 0 )
+            if (boidSteeringType[i] == 0)
             {
                 (((entries[i].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[0].behaviour as Separation).useOldValues = true;
                 (((entries[i].behavior as PrioritySteering).Groups[2] as BlendedSteering).Behaviors[1].behaviour as Cohesion).useOldValues = true;
@@ -84,9 +84,9 @@ public class FlockGame : MultipleBirdState
 
         int boidsToUpdate = Mathf.CeilToInt(entries.Count * percentageOfBoidsToUpdate); // make sure at least one boid is updated
         int limit = (current + boidsToUpdate < entries.Count ? current + boidsToUpdate : entries.Count);
-        for(; current < limit; ++current)
+        for (; current < limit; ++current)
         {
-            if( boidSteeringType[current] == 0 )
+            if (boidSteeringType[current] == 0)
             {
                 (((entries[current].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[0].behaviour as Separation).useOldValues = false;
                 (((entries[current].behavior as PrioritySteering).Groups[2] as BlendedSteering).Behaviors[1].behaviour as Cohesion).useOldValues = false;
@@ -104,7 +104,7 @@ public class FlockGame : MultipleBirdState
 
             var distance = Vector3.Distance(entries[i].bird.position, anchor.position);
 
-            if( distance <= 40f && boidSteeringType[i] == BoidSteeringType.Free )
+            if (distance <= 40f && boidSteeringType[i] == BoidSteeringType.Free)
             {
                 entries[i].behavior = getDefaultSteering2(entries[i]);
                 boidSteeringType[i] = BoidSteeringType.FollowingAnchor;
@@ -127,23 +127,16 @@ public class FlockGame : MultipleBirdState
 
         updateTimer.Stop();
         ++frameCount;
-        //Debug.Log("Time to build K-D tree: " + kdBuildTimer.ElapsedMilliseconds / (float)frameCount + ", Time to update: " + updateTimer.ElapsedMilliseconds / (float)frameCount);
     }
 
     public int Score
     {
-        get
-        {
-            return _score;
-        }
+        get { return _score; }
     }
 
     public float TimePassed
     {
-        get
-        {
-            return t;
-        }
+        get { return t; }
     }
 
     Steering getDefaultSteering(Entry e)
@@ -157,7 +150,6 @@ public class FlockGame : MultipleBirdState
         var cohesion = new Cohesion(e.bird, flock, 75f, 0f); cohesion.aknnApproxVal = 25f; cohesion.maxNeighborhoodSize = 15;
         var velMatch = new VelocityMatch(e.bird, flock, 20f, 0.0f); velMatch.aknnApproxVal = 50f;
 
-
         var bbox = new Bounds(new Vector3(1162, 113, 770), new Vector3(500, 150, 500));
         var wander = new SteeringBehaviors.Wander(e.bird, e.bird.maxSpeed, 30f, 50f, bbox);
         wander.theta = UnityEngine.Random.Range(0f, 360f);
@@ -166,12 +158,10 @@ public class FlockGame : MultipleBirdState
 
         blended[0] = new BlendedSteering(e.bird, new BehaviorAndWeight(obstacleAvoidance, 1f));
         blended[1] = new BlendedSteering(e.bird,
-                                         new BehaviorAndWeight(separation, 1f)
-                                         );
+                                         new BehaviorAndWeight(separation, 1f));
         blended[2] = new BlendedSteering(e.bird, new BehaviorAndWeight(wander, 0.85f), // 0
                                                  new BehaviorAndWeight(cohesion, 0.90f),
-                                                 new BehaviorAndWeight(velMatch, 0.50f)
-                                         );
+                                                 new BehaviorAndWeight(velMatch, 0.50f));
 
         return new PrioritySteering(1f, blended);
     }
@@ -213,13 +203,9 @@ public class FlockGame : MultipleBirdState
         return new PrioritySteering(1f, blended);
     }
 
-    public override void Update(float dt, Bird bird)
-    {
-    }
+    public override void Update(float dt, Bird bird) {}
 
-    public override void FixedUpdate()
-    {
-    }
+    public override void FixedUpdate() {}
 
     public override void onCollisionEnter(Collision other)
     {

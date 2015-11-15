@@ -32,16 +32,7 @@ public class DummyEntity : Entity
         get { return float.NaN; }
         set { Debug.Log("DummyEntity.maxSpeed [set] is not defined"); }
     }
-	
-	public void Health(float val)
-	{
-	}
-	
-	public float Health()
-	{
-		return float.NaN;
-	}
-	
+
 	public string tag
 	{
 		get { return "DummyEntity"; }

@@ -8,4 +8,3 @@ namespace Flocking
 		public Vector3 orientation; // the vector that shows where we are looking
 	}
 }
-
