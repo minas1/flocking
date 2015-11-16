@@ -74,7 +74,7 @@ namespace Flocking
             int occupiedSlots = slotAssignments.Count;
             
             // check if the pattern supports more slots
-            if( !pattern.SupportsSlots(occupiedSlots + 1) )
+            if (!pattern.SupportsSlots(occupiedSlots + 1))
                 return false;
             
             // add a new slot assignment
@@ -97,7 +97,7 @@ namespace Flocking
         /// </summary>
         public void RemoveCharacter(Entity character)
         {
-            if( !slotAssignments.ContainsKey(character) )
+            if (!slotAssignments.ContainsKey(character))
                 return;
             
             var slot = slotAssignments[character];

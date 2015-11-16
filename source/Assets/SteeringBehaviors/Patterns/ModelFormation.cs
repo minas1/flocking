@@ -40,13 +40,10 @@ namespace Flocking
             if (positions.Count == 0)
                 return new Vector3(float.NaN, float.NaN, float.NaN);
 
-            if( slotNumber >= positions.Count )
+            if (slotNumber >= positions.Count)
                 return anchor.position + positions[UnityEngine.Random.Range(0, positions.Count)];
 
-
-            var pos = anchor.position + positions[slotNumber];
-            
-            return pos;
+            return anchor.position + positions[slotNumber];
         }
         
         public override bool SupportsSlots(int slotCount)

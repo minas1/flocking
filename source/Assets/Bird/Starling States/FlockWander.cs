@@ -82,7 +82,7 @@ public class FlockWander : MultipleBirdState
         updateTimer.Start();
 
         // reset values
-        for(int i = 0; i < entries.Count; ++i)
+        for (int i = 0; i < entries.Count; ++i)
         {
             (((entries[i].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[0].behaviour as Separation).useOldValues = true;
             (((entries[i].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[1].behaviour as Cohesion).useOldValues = true;
@@ -91,14 +91,14 @@ public class FlockWander : MultipleBirdState
 
         int boidsToUpdate = Mathf.CeilToInt(entries.Count * percentageOfBoidsToUpdate); // make sure at least one boid is updated
         int limit = (current + boidsToUpdate < entries.Count ? current + boidsToUpdate : entries.Count);
-        for(; current < limit; ++current)
+        for (; current < limit; ++current)
         {
             (((entries[current].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[0].behaviour as Separation).useOldValues = false;
             (((entries[current].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[1].behaviour as Cohesion).useOldValues = false;
             (((entries[current].behavior as PrioritySteering).Groups[1] as BlendedSteering).Behaviors[2].behaviour as VelocityMatch).useOldValues = false;
         }
 
-        if( current == entries.Count )
+        if (current == entries.Count)
             current = 0;
 
         // update birds and calculate the center of the flock
@@ -107,7 +107,6 @@ public class FlockWander : MultipleBirdState
 
         updateTimer.Stop();
         ++frameCount;
-        //Debug.Log("Time to build K-D tree: " + kdBuildTimer.ElapsedMilliseconds / (float)frameCount + ", Time to update: " + updateTimer.ElapsedMilliseconds / (float)frameCount);
     }
 
     Steering getDefaultSteering(Entry e, Flock flock)
@@ -144,26 +143,15 @@ public class FlockWander : MultipleBirdState
         return new PrioritySteering(1f, blended);
     }
 
-    public override void Update(float dt, Bird bird)
-    {
-    }
+    public override void Update(float dt, Bird bird) {}
 
-    public override void FixedUpdate()
-    {
-    }
+    public override void FixedUpdate() {}
 
-    public override void onCollisionEnter(Collision other)
-    {
-    }
+    public override void onCollisionEnter(Collision other) {}
     
-    public override void onCollisionStay(Collision other)
-    {
-    }
+    public override void onCollisionStay(Collision other) {}
     
-    public override void onCollisionExit(Collision other)
-    {
-    }
-
+    public override void onCollisionExit(Collision other) {}
 
     /// <summary>
     /// Gets or sets the cohesion to anchor weight.
@@ -176,7 +164,7 @@ public class FlockWander : MultipleBirdState
         {
             _cohesionToAnchorWeight = value;
 
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -193,7 +181,7 @@ public class FlockWander : MultipleBirdState
         {
             _separationFromAnchorWeight = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -210,7 +198,7 @@ public class FlockWander : MultipleBirdState
         {
             _velMatchToAnchorWeight = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -270,7 +258,7 @@ public class FlockWander : MultipleBirdState
         {
             _velocityMatchWeight = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -286,7 +274,7 @@ public class FlockWander : MultipleBirdState
         {
             _separationAknnVal = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -302,7 +290,7 @@ public class FlockWander : MultipleBirdState
         {
             _separationDistance = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -318,7 +306,7 @@ public class FlockWander : MultipleBirdState
         {
             _cohesionDistance = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -334,7 +322,7 @@ public class FlockWander : MultipleBirdState
         {
             _velocityMatchDistance = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -353,7 +341,7 @@ public class FlockWander : MultipleBirdState
         {
             _separationK = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -372,7 +360,7 @@ public class FlockWander : MultipleBirdState
         {
             _cohesionK = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -391,7 +379,7 @@ public class FlockWander : MultipleBirdState
         {
             _velocityMatchK = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -407,7 +395,7 @@ public class FlockWander : MultipleBirdState
         {
             _cohesionAknnVal = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -423,7 +411,7 @@ public class FlockWander : MultipleBirdState
         {
             _velocityMatchAknnVal = value;
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -439,7 +427,7 @@ public class FlockWander : MultipleBirdState
         {
             _cohesionMinDotProduct = Mathf.Cos((value * 0.5f) * Mathf.Deg2Rad);
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -455,7 +443,7 @@ public class FlockWander : MultipleBirdState
         {
             _separationMinDotProduct = Mathf.Cos((value * 0.5f) * Mathf.Deg2Rad);
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -471,7 +459,7 @@ public class FlockWander : MultipleBirdState
         {
             _velMatchMinDotProduct = Mathf.Cos((value * 0.5f) * Mathf.Deg2Rad);
             
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var prioritySteering = entry.behavior as PrioritySteering;
                 var blendedSteerings = prioritySteering.Groups[1] as BlendedSteering;
@@ -489,12 +477,12 @@ public class FlockWander : MultipleBirdState
     {
         set
         {
-            foreach(var entry in entries)
+            foreach (var entry in entries)
                 entry.bird.maxSpeed = value;
         }
         get
         {
-            if( entries.Count == 0 )
+            if (entries.Count == 0)
                 return float.NaN;
 
             return entries[0].bird.maxSpeed;
