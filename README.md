@@ -35,7 +35,7 @@ The available models are:
 * whale.txt
 * dragon.txt
 
-![Alt text](/screenshots/shape formation behavior.png?raw=true "Shape Formation mode")
+![Alt text](/screenshots/shape formation.png?raw=true "Shape Formation mode")
 
 ### Gather the Flock mini game
 This is a simple mini game in which the player must move close to birds to add them to his/her flock. The goal is to make a flock as large as possible in 60 seconds.  
