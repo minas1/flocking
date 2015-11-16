@@ -24,7 +24,7 @@ public class Main : MonoBehaviour
     {
         Flocking,
         Formation,
-		Game
+        Game
     }
 
     State state = State.NotStarted, prevState = State.NotStarted;
@@ -62,9 +62,9 @@ public class Main : MonoBehaviour
     List<int> highscores;
     string playerName = "";
 
-	// Use this for initialization
-	void Start()
-	{
+    // Use this for initialization
+    void Start()
+    {
         player = GameObject.Find("Player");
         player.GetComponent<Starling>().maxSpeed = 0f;
 
@@ -79,7 +79,7 @@ public class Main : MonoBehaviour
 
         LoadHighScores(SAVEFILE);
     }
-	
+    
     void Reset()
     {
         state = State.NotStarted;
@@ -95,9 +95,9 @@ public class Main : MonoBehaviour
         playerName = "";
     }
 
-	// Update is called once per frame
-	void Update()
-	{
+    // Update is called once per frame
+    void Update()
+    {
         fpsCalculator.Update(Time.deltaTime);
 
         if (state == State.NotStarted)
@@ -167,7 +167,7 @@ public class Main : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Q))
                 Reset();
         }
-	}
+    }
 
     void Pause()
     {
@@ -311,7 +311,7 @@ public class Main : MonoBehaviour
 
             GUI.Label(new Rect(Screen.width * 0.5f - 20f, Screen.height * 0.5f - 110f, 40f, 25f), "Mode");
             int modeIndex = GUI.SelectionGrid(new Rect(Screen.width * 0.5f - 200f * 0.5f, Screen.height * 0.5f - 90f, 200f, 70f), (mode == Mode.Flocking ? 0 : mode == Mode.Formation ? 1 : 2), new GUIContent[]{new GUIContent("Wander Behavior"), new GUIContent("Shape Formation"), new GUIContent("\"Gather the Flock mini-game\"")}, 1);
-			mode = (modeIndex == 0 ? Mode.Flocking : modeIndex == 1 ? Mode.Formation : Mode.Game);
+            mode = (modeIndex == 0 ? Mode.Flocking : modeIndex == 1 ? Mode.Formation : Mode.Game);
 
             if (mode == Mode.Flocking)
             {
@@ -343,15 +343,15 @@ public class Main : MonoBehaviour
                     BoidsFormation(vertices);
 
                 }
-				else if (mode == Mode.Game)
-				{
+                else if (mode == Mode.Game)
+                {
                     var bbox = new Bounds(new Vector3(1162, 113, 770), new Vector3(500, 150, 500));
-					GenerateBoidsBetween(NUM_BIRDS_GAME, bbox);
-					BoidsHuntMiniGame();
+                    GenerateBoidsBetween(NUM_BIRDS_GAME, bbox);
+                    BoidsHuntMiniGame();
                     state = State.InGame;
-					cameraAngle = 0f;
-					cameraDistanceFromFlock = 50f;
-				}
+                    cameraAngle = 0f;
+                    cameraDistanceFromFlock = 50f;
+                }
             }
             else if (GUI.Button(new Rect(Screen.width * 0.5f - 50f, Screen.height * 0.5f + 160f, 100f, 40f), "Exit"))
                 Application.Quit();

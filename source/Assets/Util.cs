@@ -5,35 +5,35 @@ using UnityEngine;
 public static class Util
 {
 
-	/// <summary>
-	/// Normalizes the angle.
-	/// </summary>
-	/// <returns>
-	/// The angle in [-180,180]
-	/// </returns>
-	/// <param name='angle'>
-	/// Angle from [0,360]
-	/// </param>
-	public static float NormalizeAngle(float angle)
-	{
-		if( angle >= 180f )
-			return angle - 360f;
-		
-		return angle;
-	}
-	
-	public static bool isInRange(float val, float min, float max)
-	{
-		return val >= min && val <= max;
-	}
-	
-	/// <summary>
-	/// Returns a random number (-1, 1) with higher chance to be close to 0
-	/// </summary>
-	public static float RandomBinomial()
-	{
-		return UnityEngine.Random.Range(0f, 1f) - UnityEngine.Random.Range(0f, 1f);
-	}
+    /// <summary>
+    /// Normalizes the angle.
+    /// </summary>
+    /// <returns>
+    /// The angle in [-180,180]
+    /// </returns>
+    /// <param name='angle'>
+    /// Angle from [0,360]
+    /// </param>
+    public static float NormalizeAngle(float angle)
+    {
+        if( angle >= 180f )
+            return angle - 360f;
+        
+        return angle;
+    }
+    
+    public static bool isInRange(float val, float min, float max)
+    {
+        return val >= min && val <= max;
+    }
+    
+    /// <summary>
+    /// Returns a random number (-1, 1) with higher chance to be close to 0
+    /// </summary>
+    public static float RandomBinomial()
+    {
+        return UnityEngine.Random.Range(0f, 1f) - UnityEngine.Random.Range(0f, 1f);
+    }
 
     public static void GetCollidersInRange(List<Collider> colliders, string tag, Vector3 p, float distance)
     {

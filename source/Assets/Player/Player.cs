@@ -10,16 +10,16 @@ public class Player : MonoBehaviour
 
     Controller controller;
 
-	// Use this for initialization
-	void Start()
-	{
+    // Use this for initialization
+    void Start()
+    {
         starlingComponent = GetComponent<Starling>();
         controller = null;//new Controller();
-	}
-	
-	// Update is called once per frame
-	void Update()
-	{	
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {    
         if( controller != null && controller.IsConnected )
         {
             var frame = controller.Frame();
@@ -71,12 +71,12 @@ public class Player : MonoBehaviour
                     transform.eulerAngles = new Vector3(MAX_VERTICAL_ANGLE, transform.eulerAngles.y, transform.eulerAngles.z);
             }
         }
-	}
+    }
 
-	void FixedUpdate()
-	{
+    void FixedUpdate()
+    {
         GetComponent<Rigidbody>().velocity = transform.forward * starlingComponent.maxSpeed;
-	}
+    }
 
     void OnCollisionEnter(Collision other)
     {

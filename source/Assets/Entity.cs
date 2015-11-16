@@ -3,11 +3,11 @@ using System;
 
 public interface Entity
 {
-	Vector3 velocity
-	{
-		get;
-		set;
-	}
+    Vector3 velocity
+    {
+        get;
+        set;
+    }
 
     float maxSpeed
     {
@@ -21,15 +21,15 @@ public interface Entity
         set;
     }
 
-	Transform transform
-	{
-		get;
-	}
-	
-	string tag
-	{
-		get;
-	}
+    Transform transform
+    {
+        get;
+    }
+    
+    string tag
+    {
+        get;
+    }
 
     string name
     {

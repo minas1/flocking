@@ -10,9 +10,9 @@ public class Starling : Bird
 
     Animation anim;
 
-	// Use this for initialization
-	public override void Start()
-	{
+    // Use this for initialization
+    public override void Start()
+    {
         anim = GetComponent<Animation>();
         foreach(AnimationState animState in anim)
         {
@@ -23,11 +23,11 @@ public class Starling : Bird
         }
 
         maxSpeed = 20f;
-	}
+    }
 
-	// Update is called once per frame
-	public override void Update()
-	{
+    // Update is called once per frame
+    public override void Update()
+    {
         if (state != null)
         {
             if (state.IsSingleBirdState)
@@ -49,8 +49,8 @@ public class Starling : Bird
     }
     
     public override void FixedUpdate()
-	{
-		if (state != null)
+    {
+        if (state != null)
             state.FixedUpdate();
-	}
+    }
 }
