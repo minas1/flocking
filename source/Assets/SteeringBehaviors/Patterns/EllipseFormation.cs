@@ -4,12 +4,12 @@ using System;
 
 namespace Flocking
 {
-	/// <summary>
-	/// A simple V formation.
-	/// </summary>
-	public class EllipseFormation : FormationPattern
-	{
-		Entity _anchor;
+    /// <summary>
+    /// A simple V formation.
+    /// </summary>
+    public class EllipseFormation : FormationPattern
+    {
+        Entity _anchor;
         List<Vector3> positions;
 
         float t = 0f;
@@ -87,31 +87,31 @@ namespace Flocking
             positions.RemoveAt(slotAssignment.slotNumber);
         }
 
-		public override int GetDriftOffset(List<FormationManager.SlotAssignment> slotAssignments)
-		{
-			return 0;
-		}
-		
-		public override Vector3 GetSlotPosition(int slotNumber)
-		{
+        public override int GetDriftOffset(List<FormationManager.SlotAssignment> slotAssignments)
+        {
+            return 0;
+        }
+        
+        public override Vector3 GetSlotPosition(int slotNumber)
+        {
             if (positions.Count == 0)
                 return new Vector3(float.NaN, float.NaN, float.NaN);
             
             var pos = anchor.position + positions[slotNumber];
 
             return pos;
-		}
-		
-		public override bool SupportsSlots(int slotCount)
-		{
+        }
+        
+        public override bool SupportsSlots(int slotCount)
+        {
             return true;
-		}
-		
+        }
+        
         public override Entity anchor
         {
             get { return _anchor; }
             set { _anchor = value; }
         }
-	}
+    }
 }
 

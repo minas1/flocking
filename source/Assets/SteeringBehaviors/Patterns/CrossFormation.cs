@@ -4,12 +4,12 @@ using System;
 
 namespace Flocking
 {
-	/// <summary>
-	/// A simple V formation.
-	/// </summary>
+    /// <summary>
+    /// A simple V formation.
+    /// </summary>
     public class CrossFormation : FormationPattern
-	{
-		Entity _anchor;
+    {
+        Entity _anchor;
         public float length; // length of each side
 
         List<float> distances; // [slotNumber, distance]
@@ -37,13 +37,13 @@ namespace Flocking
             distances.RemoveAt(slotAssignment.slotNumber);
         }
 
-		public override int GetDriftOffset(List<FormationManager.SlotAssignment> slotAssignments)
-		{
-			return 0;
-		}
-		
-		public override Vector3 GetSlotPosition(int slotNumber)
-		{
+        public override int GetDriftOffset(List<FormationManager.SlotAssignment> slotAssignments)
+        {
+            return 0;
+        }
+        
+        public override Vector3 GetSlotPosition(int slotNumber)
+        {
             if (distances.Count == 0)
                 return new Vector3(float.NaN, float.NaN, float.NaN);
 
@@ -64,18 +64,18 @@ namespace Flocking
                 pos = anchor.position + Vector3.up * distances[slotNumber];
 
             return pos;
-		}
-		
-		public override bool SupportsSlots(int slotCount)
-		{
+        }
+        
+        public override bool SupportsSlots(int slotCount)
+        {
             return true;
-		}
-		
+        }
+        
         public override Entity anchor
         {
             get { return _anchor; }
             set { _anchor = value; }
         }
-	}
+    }
 }
 

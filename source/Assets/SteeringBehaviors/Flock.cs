@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Flocking
 {
-	public class Flock
-	{
-		List<Entity> boids;
+    public class Flock
+    {
+        List<Entity> boids;
         alglib.kdtree kdt;
 
         double[] point;
@@ -13,9 +13,9 @@ namespace Flocking
 
         List<Entity> boidsX, boidsY, boidsZ; // boids sorted by x, y, z coordinate
 
-		public Flock(params Entity[] _boids)
-		{
-			boids = new List<Entity>();
+        public Flock(params Entity[] _boids)
+        {
+            boids = new List<Entity>();
             point = new double[3];
 
             results = new double[0, 0];
@@ -25,13 +25,13 @@ namespace Flocking
             boidsY = new List<Entity>();
             boidsZ = new List<Entity>();
 
-			Add(_boids);  
-		}
-		
-		public List<Entity> Boids
-		{
-			get { return boids; }
-		}
+            Add(_boids);  
+        }
+        
+        public List<Entity> Boids
+        {
+            get { return boids; }
+        }
 
         public void RebuildKdTree()
         {
@@ -256,42 +256,42 @@ namespace Flocking
             return boids.Count;
         }
 
-		/// <summary>
-		/// Gets the neighbourhood center.
-		/// </summary>
-		public Vector3 GetNeighbourhoodCenter(List<Entity> neighbourhood)
-		{
-			var center = Vector3.zero;
-			if( neighbourhood.Count == 0 )
-				return center;
-			
-			foreach(var boid in neighbourhood)
-				center += boid.transform.position;
-			
-			return center / neighbourhood.Count;
-		}
-		
-		public Vector3 GetNeighbourhoodAverageVelocity(List<Entity> neighbourhood)
-		{
-			var vel = Vector3.zero;
-			if( neighbourhood.Count == 0 )
-				return vel;
-			
-			foreach (var boid in neighbourhood)
-				vel += boid.velocity;
-			
-			return vel / neighbourhood.Count;
-		}
-		
-		/// <summary>
-		/// Adds a variable number of boids into the flock.
-		/// </summary>
-		public void Add(params Entity[] _boids)
-		{
+        /// <summary>
+        /// Gets the neighbourhood center.
+        /// </summary>
+        public Vector3 GetNeighbourhoodCenter(List<Entity> neighbourhood)
+        {
+            var center = Vector3.zero;
+            if( neighbourhood.Count == 0 )
+                return center;
+            
+            foreach(var boid in neighbourhood)
+                center += boid.transform.position;
+            
+            return center / neighbourhood.Count;
+        }
+        
+        public Vector3 GetNeighbourhoodAverageVelocity(List<Entity> neighbourhood)
+        {
+            var vel = Vector3.zero;
+            if( neighbourhood.Count == 0 )
+                return vel;
+            
+            foreach (var boid in neighbourhood)
+                vel += boid.velocity;
+            
+            return vel / neighbourhood.Count;
+        }
+        
+        /// <summary>
+        /// Adds a variable number of boids into the flock.
+        /// </summary>
+        public void Add(params Entity[] _boids)
+        {
             if (boids.Count + _boids.Length >= points.Length / 6)
                 points = new double[(boids.Count + _boids.Length) * 2, 6];
 
-			foreach (var boid in _boids)
+            foreach (var boid in _boids)
             {
                 boids.Add(boid);
 
@@ -299,24 +299,24 @@ namespace Flocking
                 boidsY.Add(boid);
                 boidsZ.Add(boid);
             }
-		}
-		
-		/// <summary>
-		/// Removes a variable number of boids from the flock.
-		/// </summary>
-		public void Remove(params Entity[] _boids)
-		{
-			foreach(var boid in _boids)
+        }
+        
+        /// <summary>
+        /// Removes a variable number of boids from the flock.
+        /// </summary>
+        public void Remove(params Entity[] _boids)
+        {
+            foreach(var boid in _boids)
                 boids.Remove(boid);
-		}
-		
-		/// <summary>
-		/// Removes all boids from the flock.
-		/// </summary>
-		public void RemoveAll()
-		{
-			boids.Clear();
-		}
+        }
+        
+        /// <summary>
+        /// Removes all boids from the flock.
+        /// </summary>
+        public void RemoveAll()
+        {
+            boids.Clear();
+        }
 
         public void Merge(params Flock[] flocks)
         {
@@ -330,12 +330,12 @@ namespace Flocking
             }
         }
 
-		/// <summary>
-		/// Merges flocks and returns a new one
-		/// </summary>
-		public static Flock MergeFlocks(params Flock[] flocks)
-		{
-			Flock newFlock = new Flock();
+        /// <summary>
+        /// Merges flocks and returns a new one
+        /// </summary>
+        public static Flock MergeFlocks(params Flock[] flocks)
+        {
+            Flock newFlock = new Flock();
 
             foreach (var f in flocks)
             {
@@ -346,10 +346,10 @@ namespace Flocking
                 }
             }
 
-			return newFlock;
-		}
+            return newFlock;
+        }
 
 
-	}
+    }
 }
 

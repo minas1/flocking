@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface Steering
 {
-	SteeringOutput GetSteering();
+    SteeringOutput GetSteering();
 }
